@@ -29,13 +29,25 @@ int Reservoir::CheckGasLevel()
 }
 
 // Tops up the water level of the reservoir by numWater
-void Reservoir::WaterTopUp(int numWater)
+void Reservoir::WaterTopUp(int level)
 {
-    waterLevel += numWater;
+    waterLevel += level;
 }
 
 // Tops up the gas level of the reservoir by numGas
-void Reservoir::GasTopUp(int numGas)
+void Reservoir::GasTopUp(int level)
 {
-    gasLevel += numGas;
+    gasLevel += level;
+}
+
+// Provide water for the bushfire management bot
+void Reservoir::ProvideWater(int level)
+{
+    waterLevel -= level;
+}
+
+// Provide gas for the bushfire management bot
+void Reservoir::ProvideGas(int level)
+{
+    gasLevel -= level;   
 }

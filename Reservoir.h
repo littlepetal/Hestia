@@ -18,16 +18,16 @@ class Reservoir
         int CheckGasLevel();
 
         // Tops up the water level of the reservoir by numWater
-        void WaterTopUp(int numWater);
+        void WaterTopUp(int level);
 
         // Tops up the gas level of the reservoir by numGas
-        void GasTopUp(int numGas);
+        void GasTopUp(int level);
 
         // Give out numBombs amount of water bombs
-        void DistributeWaterBombs(int numBombs);
+        void ProvideWater(int level);
 
         // Give out numBombs amount of flame bombs
-        void DistributeFlameBombs(int numBombs);
+        void ProvideGas(int level);
 
     private:
 
