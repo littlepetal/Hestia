@@ -29,15 +29,15 @@ int Bush::ID()
 // and returns the hazardous indicator as a boolean
 bool Bush::IsHazard()
 {
-    // if (hazard)
-    // {
-    //     std::cout << "This bush is hazardous." << std::endl;
+    if (hazard)
+    {
+        std::cout << "This bush is hazardous." << std::endl;
 
-    // }
-    // else
-    // {
-    //     std::cout << "This bush is not hazardous." << std::endl;   
-    // }
+    }
+    else
+    {
+        std::cout << "This bush is not hazardous." << std::endl;   
+    }
 
     return hazard;
 }
@@ -46,15 +46,15 @@ bool Bush::IsHazard()
 // and returns the fire indicator as a boolean
 bool Bush::OnFire()
 {
-    // if (fire)
-    // {
-    //     std::cout << "This bush is on fire!" << std::endl;
+    if (fire)
+    {
+        std::cout << "This bush is on fire!" << std::endl;
 
-    // }
-    // else
-    // {
-    //     std::cout << "This bush is not on fire." << std::endl;   
-    // }
+    }
+    else
+    {
+        std::cout << "This bush is not on fire." << std::endl;   
+    }
 
     return fire;
 }
