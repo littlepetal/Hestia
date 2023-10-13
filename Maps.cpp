@@ -1,5 +1,7 @@
 #include "Maps.h"
 
+#include <iostream>
+
 Maps::Maps()
 {
 
@@ -13,13 +15,35 @@ Maps::~Maps()
 // Adds the specified bush to the hazards map with its ID as the key
 void Maps::AddHazard(int bushID, Bush* hazard)
 {
-    hazardsMap.insert({bushID, hazard});
+    // Try to insert the bush into the hazards map
+    bool insertion = hazardsMap.insert({bushID, hazard}).second;
+
+    // Output information about the insertion
+    if (insertion)
+    {
+        std::cout << "The bush is now on the hazards map." << std::endl;
+    }
+    else
+    {
+        std::cout << "The bush was already on the hazrds map." << std::endl;
+    }
 }
 
 // Adds the specified bush to the fires map with its ID as the key
 void Maps::AddFire(int bushID, Bush* fire)
 {
-    firesMap.insert({bushID, fire});
+    // Try to insert the bush into the fires map
+    bool insertion = firesMap.insert({bushID, fire}).second;
+
+    // Output information about the insertion
+    if (insertion)
+    {
+        std::cout << "The bush is now on the fires map." << std::endl;
+    }
+    else
+    {
+        std::cout << "The bush was already on the fires map." << std::endl;
+    }
 }
 
 // Returns the pointer to the hazard with the given bush ID

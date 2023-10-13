@@ -64,6 +64,9 @@ bool Bush::OnFire()
 void Bush::ControlledBurning()
 {
     hazard = false;
+
+    // Output result
+    std::cout << "The hazard has been eliminated." << std::endl;
 }
 
 // Eliminates the bush fire
@@ -71,4 +74,7 @@ void Bush::ControlledBurning()
 void Bush::EliminateFire()
 {
     fire = false;
+
+    // Output result
+    std::cout << "The fire has been eliminated." << std::endl;
 }
