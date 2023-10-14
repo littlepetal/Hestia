@@ -43,6 +43,12 @@ class TestBench
 
         // Keep track of all th ebushes
         std::vector<Bush*> bushes;
+
+        // Display controlled burning outcome
+        void CheckControlledBurningOutcome();
+
+        // Display fire elimination outcome
+        void CheckFireEliminationOutcome();
 };
 
 #endif

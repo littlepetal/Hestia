@@ -69,6 +69,11 @@ void TestBench::RunSufficientReservoirForHazards ()
         }    
     }
 
+    CheckControlledBurningOutcome();
+}
+
+void TestBench::CheckControlledBurningOutcome()
+{
     // Check controlled burning outcome
     std::cout << "\nChecking result of controlled burning...\n" << std::endl;
 
@@ -87,6 +92,35 @@ void TestBench::RunSufficientReservoirForHazards ()
 
     // Indicate successfulness
     if (remainingHazards != 0)
+    {
+        std::cout << "Mission failed... Bad bot" << std::endl;
+    }
+    else
+    {
+        std::cout << "Mission succeeded... Good bot" << std:: endl;
+    }
+}
+
+void TestBench::CheckFireEliminationOutcome()
+{
+    // Check fire elimination outcome
+    std::cout << "\nChecking result of fire elimination...\n" << std::endl;
+
+    // Counter for any remaining fires
+    int remainingFires = 0;
+
+    // Count the number of remaining fires
+    for (int i = 0; i < bushes.size(); i++)
+    {
+        if (bushes[i]->OnFire() == true)
+        {
+            // Increment the ramaining fires counter
+            remainingFires++;
+        }
+    }
+
+    // Indicate successfulness
+    if (remainingFires != 0)
     {
         std::cout << "Mission failed... Bad bot" << std::endl;
     }
