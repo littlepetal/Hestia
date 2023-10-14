@@ -1,10 +1,12 @@
 #ifndef _MAPS_H
 #define _MAPS_H
 
+//--Includes-----------------------------------------------------------
 #include "Bush.h"
 
 #include <map>
 
+//--Maps Interface---------------------------------------------------
 class Maps
 {
     public:

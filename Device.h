@@ -1,9 +1,11 @@
 #ifndef _DEVICE_H
 #define _DEVICE_H
 
+//--Includes-----------------------------------------------------------
 #include "Maps.h"
 #include "Reservoir.h"
 
+//--Device Interface---------------------------------------------------
 class Device
 {
     public:
@@ -26,6 +28,7 @@ class Device
         int availableResource;
 };
 
+//--HydroBlaster Interface---------------------------------------------------
 class HydroBlaster: public Device
 {
     public:
@@ -46,6 +49,7 @@ class HydroBlaster: public Device
         
 };
 
+//--FlameThrower Interface---------------------------------------------------
 class FlameThrower: public Device
 {
     public:

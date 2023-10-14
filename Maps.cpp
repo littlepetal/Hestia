@@ -1,12 +1,16 @@
+//--Includes-----------------------------------------------------------
 #include "Maps.h"
 
 #include <iostream>
 
+//--Maps Implementation------------------------------------------
+// Constructs a maps object
 Maps::Maps()
 {
     // std::cout << "Maps[CTor]: Maps signing on." << std::endl;
 }
 
+// Deconstructs the maps object
 Maps::~Maps()
 {
     // std::cout << "Maps[DTor]: Maps signing off." << std::endl;

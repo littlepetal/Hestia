@@ -1,6 +1,7 @@
 #ifndef _RESERVOIR_H
 #define _RESERVOIR_H
 
+//--Reservoir Interface---------------------------------------------------
 class Reservoir
 {
     public:

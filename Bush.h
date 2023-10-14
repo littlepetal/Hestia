@@ -1,6 +1,7 @@
 #ifndef _BUSH_H
 #define _BUSH_H
 
+//--Bush Interface---------------------------------------------------
 class Bush
 {        
     public:

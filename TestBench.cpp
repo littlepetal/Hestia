@@ -1,7 +1,10 @@
+//--Includes-----------------------------------------------------------
 #include "TestBench.h"
 
 #include <iostream>
 
+//--TestBench Implementation------------------------------------------
+// Constructs a test bench
 TestBench::TestBench()
 {
     // std::cout << "TestBench[CTor]: TestBench signing on." << std::endl;
@@ -21,10 +24,12 @@ TestBench::TestBench()
     // Create the bush fire control devices
     std::cout << "Setting up the bushfire control devices..." << std::endl;
 
+    // Initialise the hydro blaster and flame thrower
     hydroBlaster = new HydroBlaster();
     flameThrower = new FlameThrower();
 }
 
+// Deconstructs the test bench
 TestBench::~TestBench()
 {
     // std::cout << "TestBench[DTor]: TestBench signing off." << std::endl;
@@ -41,6 +46,9 @@ TestBench::~TestBench()
     }
 }
 
+// Simulates the situation where there is sufficient water supply
+// at the reservoir, and the hydro blaster loads enough water to 
+// eliminate all the fires in the bushland
 void TestBench::RunSufficientReservoirForFires ()
 {
     // Create the bushes and add them to the vector of bushes
@@ -87,6 +95,9 @@ void TestBench::RunSufficientReservoirForFires ()
     CheckFireEliminationOutcome();
 }
 
+// Simulates the situation where there is sufficient gas supply
+// at the reservoir, and the flame thrower loads enough gas to 
+// eliminate all the hazards in the bushland
 void TestBench::RunSufficientReservoirForHazards ()
 {
     // Create the bushes and add them to the vector of bushes
@@ -131,6 +142,10 @@ void TestBench::RunSufficientReservoirForHazards ()
     CheckControlledBurningOutcome();
 }
 
+// Simulates the situation where there is insufficient water supply
+// at the reservoir, and the load request from the hydro blaster 
+// was denied. As a result the bushfire manager bot could not
+// eliminate any fire in the bushland
 void TestBench::RunInsufficientReservoirForFires()
 {
     // Create the bushes and add them to the vector of bushes
@@ -177,6 +192,9 @@ void TestBench::RunInsufficientReservoirForFires()
     CheckFireEliminationOutcome();
 }
 
+// Checks for any remaining hazards in the bushland and displays
+// whether the bushfire manager bot has successfully eliminated
+// all hazards
 void TestBench::CheckControlledBurningOutcome()
 {
     // Check controlled burning outcome
@@ -208,6 +226,9 @@ void TestBench::CheckControlledBurningOutcome()
     }
 }
 
+// Checks for any remaining fires in the bushland and displays
+// whether the bushfire manager bot has successfully eliminated
+// all fires
 void TestBench::CheckFireEliminationOutcome()
 {
     // Check fire elimination outcome

@@ -1,7 +1,9 @@
+//--Includes-----------------------------------------------------------
 #include "Reservoir.h"
 
 #include <iostream>
 
+//--Reservoir Implementation------------------------------------------
 // Constructs an empty reservoir
 Reservoir::Reservoir()
 {

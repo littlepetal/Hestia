@@ -1,10 +1,9 @@
+//--Includes-----------------------------------------------------------
 #include "Device.h"
-#include "Maps.h"
-#include "Reservoir.h"
-#include "Bush.h"
 
 #include <iostream>
 
+//--Device Implementation------------------------------------------
 // Constructs an empty device
 Device::Device()
 {
@@ -32,11 +31,14 @@ void Device::Deploy(Maps* bushland, int bushID)
    
 }
 
+//--HydroBlaster Implementation------------------------------------------
+// Constructs a hydro blaster
 HydroBlaster::HydroBlaster()
 {
     // std::cout << "HydroBlaster[CTor]: HydroBlster signing on." << std::endl;
 }
 
+// Deconstructs a hydro blaster 
 HydroBlaster::~HydroBlaster()
 {
     // std::cout << "HydroBlaster[DTor]: HydroBlster signing off." << std::endl;
@@ -84,11 +86,14 @@ void HydroBlaster::Deploy(Maps* bushland, int bushID)
     }
 }
 
+//--FlameThrower Implementation------------------------------------------
+// Constructs a flame thrower
 FlameThrower::FlameThrower()
 {
     // std::cout << "FlameThrower[CTor]: FlameThrower signing on." << std::endl;
 }
 
+// Deconstructs the flame thrower
 FlameThrower::~FlameThrower()
 {
     // std::cout << "FlameThrower[DTor]: FlameThrower signing off." << std::endl;
