@@ -3,6 +3,14 @@
 // It is intended that this program is extended to include the use of OpenCV and
 // ROS nodes to implement the simulations on the physical turtlebot
 
+// TO DO: 
+// Reduce similaer code
+// Add simulations for more scenarios
+// Add functionality to return to reservoir should there be insufficient resources onboard
+// Add Camera
+// Add ArUco tags and associated functionalities
+// Add navigation functionalities
+
 //--Includes-----------------------------------------------------------
 #include "TestBench.h"
 
