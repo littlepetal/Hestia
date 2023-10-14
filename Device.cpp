@@ -45,17 +45,22 @@ HydroBlaster::~HydroBlaster()
 // Loads the device with water
 void HydroBlaster::Load(Reservoir* reservoir, int level)
 {
-    // Decrease the water level of the reservoir by level amount
-    reservoir->ProvideWater(level);
-
     // Notification
     std::cout << "Loading " << level << " water for the hydro blaster..." << std::endl;
 
-    // Increases the number of available water by level amount
-    availableResource += level;
+    // Attempt to receive water from reservoir
+    if (reservoir->SupplyWater(level))
+    {
+        // Increases the number of available water by level amount
+        availableResource += level;  
 
-    // Output result
-    std::cout << availableResource << " water is now available for the hydro blaster" << std::endl;
+        // Output result
+        std::cout << availableResource << " water is now available for the hydro blaster" << std::endl;     
+    }
+    else
+    {
+        std::cout << "Insufficient water at the reservoir... Loading failed." << std::endl;
+    }
 }
 
 // Blasts water at the fire indicated by the bushID
@@ -64,11 +69,19 @@ void HydroBlaster::Deploy(Maps* bushland, int bushID)
     // Notification
     std::cout << "Deploying hydro blaster..." << std::endl;
 
-    // Put out the fire
-    bushland->LocateFire(bushID)->EliminateFire();  
+    // Check that there is enough water in the bushfire manager bot
+    if (availableResource > 0)
+    {
+        // Put out the fire
+        bushland->LocateFire(bushID)->EliminateFire();  
 
-    // Decrement number of available water
-    availableResource--;
+        // Decrement number of available water
+        availableResource--;
+    }
+    else
+    {
+        std::cout << "Not enough water... Fire elimination failed." << std::endl;
+    }
 }
 
 FlameThrower::FlameThrower()
@@ -84,17 +97,22 @@ FlameThrower::~FlameThrower()
 // Loads the device with gas
 void FlameThrower::Load(Reservoir* reservoir, int level)
 {
-    // Decrease the gas level of the reservoir by level amount
-    reservoir->ProvideGas(level);
-
     // Notification
     std::cout << "Loading " << level << " gas for the flame thrower..." << std::endl;
 
-    // Increases the number of available gas by level amount
-    availableResource += level;
+    // Attempt to receive gas from reservoir
+    if (reservoir->SupplyGas(level))
+    {
+        // Increases the number of available gas by level amount
+        availableResource += level;  
 
-    // Output result
-    std::cout << availableResource << " gas is now available for the flame thrower" << std::endl;
+        // Output result
+        std::cout << availableResource << " gas is now available for the flame thrower" << std::endl;     
+    }
+    else
+    {
+        std::cout << "Insufficient gas at the reservoir... Loading failed." << std::endl;
+    }
 }
 
 // Throws flames at the hazard indicated by the bushID
@@ -103,9 +121,17 @@ void FlameThrower::Deploy(Maps* bushland, int bushID)
     // Notification
     std::cout << "Deploying flame thrower..." << std::endl;
 
-    // Rid the hazard
-    bushland->LocateHazard(bushID)->ControlledBurning(); 
+    // Check that there is enough gas in the bushfire manager bot
+    if (availableResource > 0)
+    {
+        // Rid the hazard
+        bushland->LocateHazard(bushID)->ControlledBurning(); 
 
-    // Decrement number of available gas
-    availableResource--;
+        // Decrement number of available gas
+        availableResource--;
+    }
+    else
+    {
+        std::cout << "Not enough gas... Hazard elimination failed." << std::endl;
+    }
 }

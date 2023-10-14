@@ -87,21 +87,51 @@ void Reservoir::GasTopUp(int level)
 }
 
 // Provide water for the bushfire management bot
-void Reservoir::ProvideWater(int level)
+bool Reservoir::SupplyWater(int level)
 {
-    // Notification
-    std::cout << "Providing " << level << " water for the bushfire manager bot..." << std::endl;
+    // Flag to indicate success of the supply process
+    bool supplied = false;
 
-    // Decrease water level by level amount
-    waterLevel -= level;
+    // Notification
+    std::cout << "Supplying " << level << " water for the bushfire manager bot..." << std::endl;
+
+    // Check that the reservoir has sufficient water to supply
+    if (waterLevel - level < 0)
+    {
+        std::cout << "Insufficient water level" << std::endl;
+    }
+    else
+    {
+        // Decrease water level by level amount
+        waterLevel -= level;
+
+        supplied = true;
+    }
+
+    return supplied;
 }
 
 // Provide gas for the bushfire management bot
-void Reservoir::ProvideGas(int level)
+bool Reservoir::SupplyGas(int level)
 {
-    // Notification
-    std::cout << "Providing " << level << " gas for the bushfire manager bot..." << std::endl;
+    // Flag to indicate success of the supply process
+    bool supplied = false;
 
-    // Decrease gas level by level amount
-    gasLevel -= level;   
+    // Notification
+    std::cout << "Supplying " << level << " gas for the bushfire manager bot..." << std::endl;
+
+    // Check that the reservoir has sufficient gas to supply
+    if (gasLevel - level < 0)
+    {
+        std::cout << "Insufficient gas level" << std::endl;
+    }
+    else
+    {
+        // Decrease gas level by level amount
+        gasLevel -= level;  
+
+        supplied = true;
+    } 
+
+    return supplied;
 }

@@ -5,10 +5,12 @@
 
 int main() 
 {
-    // Simulate controlled burning mode
+    // Simulate fire elimination mode
     TestBench* testBench = new TestBench();
     testBench->RunSufficientReservoirForFires();
-    
+
+    // Simulate controlled burning mode
+    // TestBench* testBench = new TestBench();
     // testBench->RunSufficientReservoirForHazards();
 
     delete testBench;

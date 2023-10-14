@@ -24,10 +24,10 @@ class Reservoir
         void GasTopUp(int level);
 
         // Give out numBombs amount of water bombs
-        void ProvideWater(int level);
+        bool SupplyWater(int level);
 
         // Give out numBombs amount of flame bombs
-        void ProvideGas(int level);
+        bool SupplyGas(int level);
 
     private:
 
