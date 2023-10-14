@@ -98,7 +98,7 @@ bool Reservoir::SupplyWater(int level)
     // Check that the reservoir has sufficient water to supply
     if (waterLevel - level < 0)
     {
-        std::cout << "Insufficient water level" << std::endl;
+        std::cout << "Insufficient water level!" << std::endl;
     }
     else
     {
@@ -123,7 +123,7 @@ bool Reservoir::SupplyGas(int level)
     // Check that the reservoir has sufficient gas to supply
     if (gasLevel - level < 0)
     {
-        std::cout << "Insufficient gas level" << std::endl;
+        std::cout << "Insufficient gas level!" << std::endl;
     }
     else
     {

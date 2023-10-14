@@ -21,6 +21,7 @@ class TestBench
         // Runs the tests
         void RunSufficientReservoirForFires();
         void RunSufficientReservoirForHazards();
+        void RunInsufficientReservoirForFires();
 
         // void RunInsufficientReservoirForHazards();
 
