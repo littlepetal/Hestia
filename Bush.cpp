@@ -5,6 +5,8 @@
 // Constructs a bush with a hazard inidicator given by hazard
 Bush::Bush(int iD, bool hazard, bool fire)
 {
+    // std::cout << "Bush[CTor]: Bush signing on." << std::endl;
+
     // Sets the ID of the bush to the given ID number
     Bush::iD = iD;
 
@@ -18,6 +20,7 @@ Bush::Bush(int iD, bool hazard, bool fire)
 // Deconstructs a bush
 Bush::~Bush()
 {
+    // std::cout << "Bush[DTor]: Bush signing off." << std::endl;
 }
 
 int Bush::ID()
@@ -31,12 +34,11 @@ bool Bush::IsHazard()
 {
     if (hazard)
     {
-        std::cout << "This bush is hazardous." << std::endl;
-
+        std::cout << "Bush " << iD << " is hazardous." << std::endl;
     }
     else
     {
-        std::cout << "This bush is not hazardous." << std::endl;   
+        std::cout << "Bush " << iD << " is not hazardous." << std::endl;   
     }
 
     return hazard;
@@ -48,12 +50,11 @@ bool Bush::OnFire()
 {
     if (fire)
     {
-        std::cout << "This bush is on fire!" << std::endl;
-
+        std::cout << "Bush " << iD << " is on fire!" << std::endl;
     }
     else
     {
-        std::cout << "This bush is not on fire." << std::endl;   
+        std::cout << "Bush " << iD << " is not on fire." << std::endl;   
     }
 
     return fire;
@@ -66,7 +67,7 @@ void Bush::ControlledBurning()
     hazard = false;
 
     // Output result
-    std::cout << "The hazard has been eliminated." << std::endl;
+    std::cout << "The hazard at bush " << iD << " has been eliminated." << std::endl;
 }
 
 // Eliminates the bush fire
@@ -76,5 +77,5 @@ void Bush::EliminateFire()
     fire = false;
 
     // Output result
-    std::cout << "The fire has been eliminated." << std::endl;
+    std::cout << "The fire at bush " << iD << " has been eliminated." << std::endl;
 }

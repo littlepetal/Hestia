@@ -4,12 +4,12 @@
 
 Maps::Maps()
 {
-
+    // std::cout << "Maps[CTor]: Maps signing on." << std::endl;
 }
 
 Maps::~Maps()
 {
-
+    // std::cout << "Maps[DTor]: Maps signing off." << std::endl;
 }
 
 // Adds the specified bush to the hazards map with its ID as the key
@@ -21,11 +21,11 @@ void Maps::AddHazard(int bushID, Bush* hazard)
     // Output information about the insertion
     if (insertion)
     {
-        std::cout << "The bush is now on the hazards map." << std::endl;
+        std::cout << "Bush " << bushID << " is now on the hazards map." << std::endl;
     }
     else
     {
-        std::cout << "The bush was already on the hazrds map." << std::endl;
+        std::cout << "Bush " << bushID << " was already on the hazrds map." << std::endl;
     }
 }
 
@@ -38,11 +38,11 @@ void Maps::AddFire(int bushID, Bush* fire)
     // Output information about the insertion
     if (insertion)
     {
-        std::cout << "The bush is now on the fires map." << std::endl;
+        std::cout << "Bush " << bushID << " is now on the fires map." << std::endl;
     }
     else
     {
-        std::cout << "The bush was already on the fires map." << std::endl;
+        std::cout << "Bush " << bushID << " was already on the fires map." << std::endl;
     }
 }
 

@@ -5,6 +5,8 @@
 // Constructs an empty reservoir
 Reservoir::Reservoir()
 {
+    // std::cout << "Reservoir[CTor]: Reservoir signing on." << std::endl;
+
     // Initialises the water level of the reservoir
     waterLevel = 0;
 
@@ -15,7 +17,7 @@ Reservoir::Reservoir()
 // Destructs the reservoir
 Reservoir::~Reservoir()
 {
-    
+    // std::cout << "Reservoir[DTor]: Reservoir signing off." << std::endl;
 }
 
 // Returns the water level

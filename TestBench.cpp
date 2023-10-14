@@ -4,6 +4,8 @@
 
 TestBench::TestBench()
 {
+    // std::cout << "TestBench[CTor]: TestBench signing on." << std::endl;
+
     // Create the bushland
     std::cout << "Initialising the bushland..." << std::endl;
 
@@ -25,7 +27,18 @@ TestBench::TestBench()
 
 TestBench::~TestBench()
 {
-    
+    // std::cout << "TestBench[DTor]: TestBench signing off." << std::endl;
+
+    // Free up memory
+    delete bushland;
+    delete reservoir;
+    delete hydroBlaster;
+    delete flameThrower;
+
+    for (int i = 0; i < bushes.size(); i++)
+    {
+        delete bushes[i];
+    }
 }
 
 void TestBench::RunSufficientReservoirForHazards ()
@@ -89,6 +102,8 @@ void TestBench::CheckControlledBurningOutcome()
             remainingHazards++;
         }
     }
+
+    std::cout << std::endl;
 
     // Indicate successfulness
     if (remainingHazards != 0)

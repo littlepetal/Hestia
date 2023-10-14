@@ -8,6 +8,8 @@
 // Constructs an empty device
 Device::Device()
 {
+    // std::cout << "Device[CTor]: Device signing on." << std::endl;
+
     // Initialise number of available resource
     availableResource = 0;
 }
@@ -15,7 +17,7 @@ Device::Device()
 // Virtual deconstructor
 Device::~Device()
 {
-    
+    // std::cout << "Device[DTor]: Device signing off." << std::endl;
 }
 
 // Loads the device with resource
@@ -32,12 +34,12 @@ void Device::Deploy(Maps* bushland, int bushID)
 
 HydroBlaster::HydroBlaster()
 {
-
+    // std::cout << "HydroBlaster[CTor]: HydroBlster signing on." << std::endl;
 }
 
 HydroBlaster::~HydroBlaster()
 {
-
+    // std::cout << "HydroBlaster[DTor]: HydroBlster signing off." << std::endl;
 }
 
 // Loads the device with water
@@ -62,21 +64,21 @@ void HydroBlaster::Deploy(Maps* bushland, int bushID)
     // Notification
     std::cout << "Deploying hydro blaster..." << std::endl;
 
-    // Decrement number of available water
-    availableResource--;
-
     // Put out the fire
     bushland->LocateFire(bushID)->EliminateFire();  
+
+    // Decrement number of available water
+    availableResource--;
 }
 
 FlameThrower::FlameThrower()
 {
-
+    // std::cout << "FlameThrower[CTor]: FlameThrower signing on." << std::endl;
 }
 
 FlameThrower::~FlameThrower()
 {
-
+    // std::cout << "FlameThrower[DTor]: FlameThrower signing off." << std::endl;
 }
 
 // Loads the device with gas
@@ -101,9 +103,9 @@ void FlameThrower::Deploy(Maps* bushland, int bushID)
     // Notification
     std::cout << "Deploying flame thrower..." << std::endl;
 
-    // Decrement number of available gas
-    availableResource--;
-
     // Rid the hazard
     bushland->LocateHazard(bushID)->ControlledBurning(); 
+
+    // Decrement number of available gas
+    availableResource--;
 }
