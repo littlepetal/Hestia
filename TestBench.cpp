@@ -41,6 +41,52 @@ TestBench::~TestBench()
     }
 }
 
+void TestBench::RunSufficientReservoirForFires ()
+{
+    // Create the bushes and add them to the vector of bushes
+    std::cout << "Creating the bushes..." << std::endl;
+
+    bushes.push_back(new Bush(0, notHazardous, notOnFire));
+    bushes.push_back(new Bush(1, notHazardous, onFire));
+    bushes.push_back(new Bush(2, notHazardous, notOnFire));
+    bushes.push_back(new Bush(3, notHazardous, onFire));
+    bushes.push_back(new Bush(4, notHazardous, notOnFire));
+    bushes.push_back(new Bush(5, notHazardous, onFire));
+    bushes.push_back(new Bush(6, notHazardous, onFire));
+
+    std::cout << std::endl;
+
+    // Give the reservoir level 100 water and gas initially
+    reservoir->WaterTopUp(200);
+    reservoir->GasTopUp(200);
+
+    // Check the water and gas level of the reservoir
+    reservoir->CheckWaterLevel();
+    reservoir->CheckGasLevel();
+
+    // Load the bush fire control devices with the required resources
+    hydroBlaster->Load(reservoir, 20);
+    flameThrower->Load(reservoir, 10);
+
+    // Perform fire elimination in the bushland
+    std::cout << "\nPerforming fire elimination in the bushland...\n" << std::endl;
+
+    // Add the bushes on fire into the fires map
+    for (int i = 0; i < bushes.size(); i++)
+    {
+        if (bushes[i]->OnFire() == true)
+        {
+            // Save the bush to the map of hazards
+            bushland->AddFire(bushes[i]->ID(), bushes[i]);
+
+            // Eliminate the hazard
+            hydroBlaster->Deploy(bushland, bushes[i]->ID());
+        }    
+    }
+
+    CheckFireEliminationOutcome();
+}
+
 void TestBench::RunSufficientReservoirForHazards ()
 {
     // Create the bushes and add them to the vector of bushes
@@ -133,6 +179,8 @@ void TestBench::CheckFireEliminationOutcome()
             remainingFires++;
         }
     }
+
+    std::cout << std::endl;
 
     // Indicate successfulness
     if (remainingFires != 0)

@@ -18,8 +18,11 @@ class TestBench
         // Deconstructs the test bench
         ~TestBench();
 
-        // Runs the test
-        void RunSufficientReservoirForHazards ();
+        // Runs the tests
+        void RunSufficientReservoirForFires();
+        void RunSufficientReservoirForHazards();
+
+        // void RunInsufficientReservoirForHazards();
 
     private:
 
