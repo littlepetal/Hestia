@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" modified="2023-10-16T03:55:53.733Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="1kU__c3Rjuenf52v5tO0" version="21.8.1" type="device">
+  <diagram name="Page-1" id="40Sqm_WNbt2wSrtSy5A3">
+    <mxGraphModel dx="1290" dy="1393" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Bush&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ ID(): int&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ IsHazard(): bool&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ OnFire(): bool&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ ControlledBurning(): void&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ EliminateFire(): void&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="140" y="180" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Maps&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ AddHazard(int bushID, Bush* hazard): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;LocateHazard(int bushID): Bush*&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ AddFire(int bushID, Bush* hazard): void&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+&amp;nbsp;LocateFire(int bushID): Bush*&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="90" y="10" width="260" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Device&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# availableResource: int&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Load(Reservoir* reservoir, int level): virtual void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;Deploy(Maps* bushland, int bushID): virtual void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="530" y="40" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Reservoir&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ CheckWaterLevel(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ CheckGasLevel(): int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ WaterTopUp(int level): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GasTopUp(int level): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SupplyWater(int level): bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SupplyGas(int level): bool&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="989" y="10" width="180" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;TestBench&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ RunSufficientReservoirForFires(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;RunSufficientReservoirForHazards(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;RunInsufficientReservoirForFires(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="530" y="-200" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;HydroBlaster&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ Load(Reservoir* reservoir, int level): virtual void&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+&amp;nbsp;Deploy(Maps* bushland, int bushID): virtual void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="370" y="184" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FlameThrower&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+ Load(Reservoir* reservoir, int level): virtual void&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+&amp;nbsp;Deploy(Maps* bushland, int bushID): virtual void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="690" y="184" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-8" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-6" target="b3iizRzZUYyZsLkQW7yZ-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="630" y="60" as="sourcePoint" />
+            <mxPoint x="790" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-9" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-7" target="b3iizRzZUYyZsLkQW7yZ-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="690" y="210" as="sourcePoint" />
+            <mxPoint x="603" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-10" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-2" target="b3iizRzZUYyZsLkQW7yZ-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="500" y="290" as="sourcePoint" />
+            <mxPoint x="660" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-11" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-5" target="b3iizRzZUYyZsLkQW7yZ-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="600" y="-70" as="sourcePoint" />
+            <mxPoint x="230" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-12" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-5" target="b3iizRzZUYyZsLkQW7yZ-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="610" y="-80" as="sourcePoint" />
+            <mxPoint x="230" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-13" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-5" target="b3iizRzZUYyZsLkQW7yZ-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="540" y="-80" as="sourcePoint" />
+            <mxPoint x="230" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b3iizRzZUYyZsLkQW7yZ-14" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3iizRzZUYyZsLkQW7yZ-5" target="b3iizRzZUYyZsLkQW7yZ-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="610" y="-80" as="sourcePoint" />
+            <mxPoint x="450" y="194" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
