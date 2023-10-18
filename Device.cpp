@@ -51,7 +51,7 @@ void HydroBlaster::Load(Reservoir* reservoir, int level)
     std::cout << "Loading " << level << " water for the hydro blaster..." << std::endl;
 
     // Attempt to receive water from reservoir
-    if (reservoir->SupplyWater(level))
+    if (reservoir->Supply(level))
     {
         // Increases the number of available water by level amount
         availableResource += level;  
@@ -106,7 +106,7 @@ void FlameThrower::Load(Reservoir* reservoir, int level)
     std::cout << "Loading " << level << " gas for the flame thrower..." << std::endl;
 
     // Attempt to receive gas from reservoir
-    if (reservoir->SupplyGas(level))
+    if (reservoir->Supply(level))
     {
         // Increases the number of available gas by level amount
         availableResource += level;  

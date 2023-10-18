@@ -1,6 +1,8 @@
 #ifndef _RESERVOIR_H
 #define _RESERVOIR_H
 
+#include <string>
+
 //--Reservoir Interface---------------------------------------------------
 class Reservoir
 {
@@ -12,31 +14,68 @@ class Reservoir
         // Destructs the reservoir
         ~Reservoir();
 
-        // Returns the water level
-        int CheckWaterLevel();
+        // Returns the resource level of the reservoir
+        virtual int CheckLevel();
 
-        // Returns the gas level
-        int CheckGasLevel();
+        // Tops up the resource level of the reservoir by level amount
+        virtual void TopUp(int level);
 
-        // Tops up the water level of the reservoir by numWater
-        void WaterTopUp(int level);
+        // Supplies level amount of resources for the device requesting it
+        virtual bool Supply(int level);
 
-        // Tops up the gas level of the reservoir by numGas
-        void GasTopUp(int level);
+    protected:
 
-        // Give out numBombs amount of water bombs
-        bool SupplyWater(int level);
+        // Indicates the resource level in the reservoir
+        int resourceLevel;
 
-        // Give out numBombs amount of flame bombs
-        bool SupplyGas(int level);
+        // A string for the name of the resource in the reservoir
+        std::string name;
+
+};
+
+class WaterTank: public Reservoir
+{
+    public:
+
+        // Contructs a water tank
+        WaterTank();
+
+        // Destructs a water tank
+        ~WaterTank();
+ 
+        // Returns the water level of the water tank
+        int CheckLevel();
+
+        // Tops up the water level of the water tank by level amount
+        void TopUp(int level);
+
+        // Supplies level amount of water for the device requesting it
+        bool Supply(int level);   
 
     private:
 
-        // Water level indicating the number of water bombs in the reservoir
-        int waterLevel;
+};
 
-        // Gas level indicating the number of flame bombs in the reservoir
-        int gasLevel;
+class GasTank: public Reservoir
+{
+    public:
+ 
+        // Contructs a gas tank
+        GasTank();
+
+        // Destructs a water tank
+        ~GasTank();
+ 
+        // Returns the gas level of the gas tank
+        int CheckLevel();
+
+        // Tops up the gas level of the gas tank by level amount
+        void TopUp(int level);
+
+        // Supplies level amount of gas for the device requesting it
+        bool Supply(int level);   
+
+    private:
 
 };
 

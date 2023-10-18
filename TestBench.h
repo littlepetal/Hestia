@@ -38,7 +38,9 @@ class TestBench
         Maps* bushland;
 
         // Keep track of the reservoir
-        Reservoir* reservoir;
+        // Reservoir* reservoir;
+        WaterTank* waterTank;
+        GasTank* gasTank;
 
         // Keep track of the devices on the bushfire manager bot
         HydroBlaster* hydroBlaster;

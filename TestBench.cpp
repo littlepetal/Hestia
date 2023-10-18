@@ -19,7 +19,9 @@ TestBench::TestBench()
     std::cout << "Initialising the reservoir..." << std::endl;
 
     // Initialise the reservoir
-    reservoir = new Reservoir();
+    // reservoir = new Reservoir();
+    waterTank = new WaterTank();
+    gasTank = new GasTank();
 
     // Create the bush fire control devices
     std::cout << "Setting up the bushfire control devices..." << std::endl;
@@ -36,7 +38,8 @@ TestBench::~TestBench()
 
     // Free up memory
     delete bushland;
-    delete reservoir;
+    delete waterTank;
+    delete gasTank;
     delete hydroBlaster;
     delete flameThrower;
 
@@ -65,16 +68,16 @@ void TestBench::RunSufficientReservoirForFires ()
     std::cout << std::endl;
 
     // Give the reservoir level 100 water and gas initially
-    reservoir->WaterTopUp(200);
-    reservoir->GasTopUp(200);
+    waterTank->TopUp(200);
+    gasTank->TopUp(200);
 
     // Check the water and gas level of the reservoir
-    reservoir->CheckWaterLevel();
-    reservoir->CheckGasLevel();
+    waterTank->CheckLevel();
+    gasTank->CheckLevel();
 
     // Load the bush fire control devices with the required resources
-    hydroBlaster->Load(reservoir, 20);
-    flameThrower->Load(reservoir, 10);
+    hydroBlaster->Load(waterTank, 20);
+    flameThrower->Load(gasTank, 10);
 
     // Perform fire elimination in the bushland
     std::cout << "\nPerforming fire elimination in the bushland...\n" << std::endl;
@@ -112,16 +115,16 @@ void TestBench::RunSufficientReservoirForHazards ()
     std::cout << std::endl;
 
     // Give the reservoir level 100 water and gas initially
-    reservoir->WaterTopUp(100);
-    reservoir->GasTopUp(100);
+    waterTank->TopUp(100);
+    gasTank->TopUp(100);
 
     // Check the water and gas level of the reservoir
-    reservoir->CheckWaterLevel();
-    reservoir->CheckGasLevel();
+    waterTank->CheckLevel();
+    gasTank->CheckLevel();
 
     // Load the bush fire control devices with the required resources
-    hydroBlaster->Load(reservoir, 10);
-    flameThrower->Load(reservoir, 10);
+    hydroBlaster->Load(waterTank, 10);
+    flameThrower->Load(gasTank, 10);
 
     // Perform controlled burning in the bushland
     std::cout << "\nPerforming controlled burning in the bushland...\n" << std::endl;
@@ -162,16 +165,16 @@ void TestBench::RunInsufficientReservoirForFires()
     std::cout << std::endl;
 
     // Give the reservoir level 100 water and gas initially
-    reservoir->WaterTopUp(3);
-    reservoir->GasTopUp(200);
+    waterTank->TopUp(3);
+    gasTank->TopUp(200);
 
     // Check the water and gas level of the reservoir
-    reservoir->CheckWaterLevel();
-    reservoir->CheckGasLevel();
+    waterTank->CheckLevel();
+    gasTank->CheckLevel();
 
     // Load the bush fire control devices with the required resources
-    hydroBlaster->Load(reservoir, 20);
-    flameThrower->Load(reservoir, 10);
+    hydroBlaster->Load(waterTank, 20);
+    flameThrower->Load(gasTank, 10);
 
     // Perform fire elimination in the bushland
     std::cout << "\nPerforming fire elimination in the bushland...\n" << std::endl;
