@@ -1,3 +1,6 @@
+// This is the Bushland node responsible for sending information about 
+// Maps, Bush and Reservoir to the Hestia node
+
 //--Includes-----------------------------------------------------------
 #include "ros.h"
 #include "std_msgs/String.h"
