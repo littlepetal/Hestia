@@ -6,6 +6,7 @@
 #include "std_msgs/String.h"
 
 #include "Maps.h"
+#include "Reservoir.h"
 
 #include <sstream>
 
