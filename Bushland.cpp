@@ -10,6 +10,24 @@
 
 #include <sstream>
 
+// Callback function to receive messages from Odometry topic
+void odometryCallback(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+
+// Callback function to receive messages from Water topic
+void waterCallback(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+
+// Callback function to receive messages from Gas topic
+void gasCallback(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+
 // Send messages about the state of the bushland to Hestia
 int main(int argc, char **argv)
 {
@@ -21,6 +39,8 @@ int main(int argc, char **argv)
     // NodeHandle is the main access point to communications with the ROS system
     ros::NodeHandle n;
 
+    // Publishers
+
     // Publisher object for publishing messages on Hazards topic
     // Set the size of the message queue to be 1000
     ros::Publisher hazardsPub = n.advertise<std_msgs::String>("Hazards", 1000);
@@ -31,6 +51,21 @@ int main(int argc, char **argv)
 
     // Read the data every 100ms
     ros::Rate loop_rate(10);
+
+    // Subscribers
+
+    // Subscriber object for subscribing to the Odometry topic
+    // Set the size of the message queue to be 1000
+    ros::Subscriber odometrySub = n.subscribe("Odometry", 1000, hazardsCallback);
+
+    // Subscriber object for subscribing to the Water topic
+    // Set the size of the message queue to be 1000
+    ros::Subscriber waterSub = n.subscribe("Water", 1000, firesCallback);
+
+    // Subscriber object for subscribing to the Gas topic
+    // Set the size of the message queue to be 1000
+    ros::Subscriber gasSub = n.subscribe("Gas", 1000, firesCallback);
+    
 
     // Count of the number of sent messages
     int sentMessagesCount = 0;
@@ -49,8 +84,8 @@ int main(int argc, char **argv)
         // Format messages
         ROS_INFO("%s", msg.data.c_str());
 
-        // Broadcast messages to subscribers
-        chatterPub.publish(msg);
+        // Broadcast messages to subscribers of Hazards topic
+        hazardsPub.publish(msg);
 
         // Call all the callbacks waiting to be called at that point in time
         // Block the main thread from exiting until ROS invokes a shutdown
@@ -61,7 +96,10 @@ int main(int argc, char **argv)
 
         // Increment the number of sent messages
         sentMessagesCount++;
-    }
+    }   
+
+    // Pump callbacks
+    ros::spin(); 
 
     return 0;
 }

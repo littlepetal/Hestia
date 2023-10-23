@@ -7,6 +7,8 @@
 
 #include "Device.h"
 
+#include <sstream>
+
 // Callback function to receive messages from Hazards topic
 void hazardsCallback(const std_msgs::String::ConstPtr& msg)
 {
@@ -30,13 +32,64 @@ int main(int argc, char **argv)
     // NodeHandle is the main access point to communications with the ROS system
     ros::NodeHandle n;
 
+    // Publishers
+
+    // Publisher object for publishing messages on Odometry topic
+    // Set the size of the message queue to be 1000
+    ros::Publisher odometryPub = n.advertise<std_msgs::String>("Odometry", 1000);
+
+    // Publisher object for publishing messages on Water topic
+    // Set the size of the message queue to be 1000
+    ros::Publisher waterPub = n.advertise<std_msgs::String>("Water", 1000);
+
+    // Publisher object for publishing messages on Gas topic
+    // Set the size of the message queue to be 1000
+    ros::Publisher gasPub = n.advertise<std_msgs::String>("Gas", 1000);
+
+    // Read the data every 100ms
+    ros::Rate loop_rate(10);
+
+    // Subscribers
+
     // Subscriber object for subscribing to Hazards topic
     // Set the size of the message queue to be 1000
-    ros::Subscriber hazardsSub = n.subscribe("chatter", 1000, hazardsCallback);
+    ros::Subscriber hazardsSub = n.subscribe("Hazards", 1000, hazardsCallback);
 
     // Subscriber object for subscribing to Fires topic
     // Set the size of the message queue to be 1000
-    ros::Subscriber firesSub = n.subscribe("chatter", 1000, firesCallback);
+    ros::Subscriber firesSub = n.subscribe("Fires", 1000, firesCallback);
+    
+
+    // Count of the number of sent messages
+    int sentMessagesCount = 0;
+
+    // Check that the thread has not been terminated
+    while(ros::ok)
+    {
+        // Message object to be published
+        std_msgs::String msg;
+
+        // Create messages
+        std::stringstream ss;
+        ss << "Odometry " << sentMessagesCount;
+        msg.data = ss.str();
+
+        // Format messages
+        ROS_INFO("%s", msg.data.c_str());
+
+        // Broadcast messages to subscribers
+        odometryPub.publish(msg);
+
+        // Call all the callbacks waiting to be called at that point in time
+        // Block the main thread from exiting until ROS invokes a shutdown
+        ros::spinOnce();
+
+        // Thread sleep
+        loop_rate.sleep();
+
+        // Increment the number of sent messages
+        sentMessagesCount++;
+    }
 
     // Pump callbacks
     ros::spin();
