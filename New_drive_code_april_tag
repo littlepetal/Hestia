@@ -1,0 +1,268 @@
+#include "maze_solver/turtlebot3_drive.h"
+#include <thread>
+
+
+// Constructor: Initializes the node, sets up publishers and subscribers.
+Turtlebot3Drive::Turtlebot3Drive()  : nh_priv_("~")
+{
+  ROS_INFO("TurtleBot3 Simulation Node Init");
+  auto ret = init(); // Calls the init function
+  ROS_ASSERT(ret);   // Asserts if initialization failed
+  received_first_scan_ = false;
+}
+
+// Destructor: Stops the turtlebot before shutting down.
+Turtlebot3Drive::~Turtlebot3Drive()
+{
+  updatecommandVelocity(STATIONARY_LINEAR, STATIONARY_ANGULAR);
+  ros::shutdown();
+}
+
+// Initialization function for setting up ROS parameters, publishers and subscribers.
+bool Turtlebot3Drive::init()
+{
+  // Set default command velocity topic if not defined.
+  std::string cmd_vel_topic_name = nh_.param<std::string>("cmd_vel_topic_name", "/cmd_vel");
+
+  // Define initial state variables and angles.
+  escape_range_       = ESCAPE_RANGE * DEG2RAD;
+  check_forward_dist_ = ROBOT_CLEARANCE;
+  check_side_dist_    = ROBOT_CLEARANCE;
+
+  tb3_pose_ = 0.0;
+  prev_tb3_pose_ = 0.0;
+
+  // Initialize publishers
+  cmd_vel_pub_   = nh_.advertise<geometry_msgs::Twist>(cmd_vel_topic_name, 10);
+
+  // Initialize subscribers to laser, odometry, and cylinder signal topics.
+  laser_scan_sub_  = nh_.subscribe("scan", 10, &Turtlebot3Drive::laserScanMsgCallBack, this);
+  odom_sub_ = nh_.subscribe("odom", 10, &Turtlebot3Drive::odomMsgCallBack, this);
+  cylinder_signal_sub_ = nh_.subscribe("cylinder_info", 10, &Turtlebot3Drive::cylinderSignalCallback, this);
+
+  return true;
+}
+
+// Callback function to update turtlebot's orientation using odometry data.
+void Turtlebot3Drive::odomMsgCallBack(const nav_msgs::Odometry::ConstPtr &msg)
+{
+  // Compute yaw (heading) from quaternion.
+  double siny = 2.0 * (msg->pose.pose.orientation.w * msg->pose.pose.orientation.z + msg->pose.pose.orientation.x * msg->pose.pose.orientation.y);
+  double cosy = 1.0 - 2.0 * (msg->pose.pose.orientation.y * msg->pose.pose.orientation.y + msg->pose.pose.orientation.z * msg->pose.pose.orientation.z);  
+  tb3_pose_ = atan2(siny, cosy);
+}
+
+// Callback function to process laser scan data.
+void Turtlebot3Drive::laserScanMsgCallBack(const sensor_msgs::LaserScan::ConstPtr &msg)
+{
+  uint16_t scan_angle[NUM_DATA_POINTS] = {FRONT_ANGLE, FRONT_RIGHT_ANGLE, FRONT_LEFT_ANGLE};
+  
+  // Parse laser data at predefined scan angles.
+  for (int num = 0; num < NUM_DATA_POINTS; num++)
+  {
+    if (std::isinf(msg->ranges.at(scan_angle[num])))
+    {
+      scan_data_[num] = msg->range_max;
+    }
+    else
+    {
+      scan_data_[num] = msg->ranges.at(scan_angle[num]);
+    }
+  }
+  received_first_scan_ = true;
+}
+
+// Function to publish the command velocity.
+void Turtlebot3Drive::updatecommandVelocity(double linear, double angular)
+{
+  geometry_msgs::Twist cmd_vel;
+
+  cmd_vel.linear.x  = linear;
+  cmd_vel.angular.z = angular;
+
+  cmd_vel_pub_.publish(cmd_vel);
+}
+
+// Callback function to handle cylinder detection signals.
+void Turtlebot3Drive::cylinderSignalCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+  if (msg->data == 1)
+  {
+    ROS_INFO("Cylinder detected!");
+  }
+  cylinder_info_ = msg->data;
+  ROS_INFO("Info: %i", cylinder_info_);
+}
+
+
+int current_location = 0; //assuming it starts at water
+int direction_step = 0;
+int desired_location = 0;
+// [[water station list], [fire 1[], [fire2], [fire3]
+int direction_list[4][4][5] = [[[0,0,0,0,0],[L,R,R,L,0],[L,R,R,L,0],[L,R,R,L,0]], //water 
+                              [[L,R,R,L,0,0],[0,0,0,0,0],[L,R,R,L,0],[L,R,R,L,0]],  //fire 1
+                              [[L,R,R,L,0],[L,R,R,L,0],[0,0,0,0,0],[L,R,R,L,0]],   //fire 2
+                              [[L,R,R,L,0],[L,R,R,L,0],[L,R,R,L,0],[0,0,0,0,0]]];   //fire 3
+
+
+// Main control function determining how the turtlebot navigates.
+bool Turtlebot3Drive::controlLoop()
+{
+  //receives desired location from destination node
+  desired_location = cylinder_info_2
+
+
+  // change this to update to set direction list based on goal and current location
+  TB3Direction turtlebot3_state_num = GET_TB3_DIRECTION;
+
+  if(cylinder_info_ == 1) //replace with april tag number
+  {
+    turtlebot3_state_num = TB3_INTERSECTION;// If cylinder detected, move to RED state.
+  }
+  else
+  {
+    turtlebot3_state_num = TB3_FOLLOW_LEFT_WALL;
+  }
+
+  //stops turtlebot at destination
+  while (cylinder_info_ == desired_location)
+  {
+    updatecommandVelocity(STATIONARY_LINEAR, STATIONARY_ANGULAR);
+  }
+
+  // State machine handling turtlebot's navigation.
+  switch(turtlebot3_state_num)
+  {
+    case 
+    // Each state decides the motion (turning, following wall, etc.) of the turtlebot.
+    case TB3_INTERSECTION:
+      switch(direction_list[current_location][desired_location][direction_step]):
+        case 'L':
+          updatecommandVelocity(LINEAR_VELOCITY, STATIONARY_ANGULAR);
+          std::this_thread::sleep_for(2000ms);
+          updatecommandVelocity(LINEAR_VELOCITY, ANGULAR_VELOCITY);
+          std::this_thread::sleep_for(2000ms);
+            
+          break;
+
+        case 'R':
+          updatecommandVelocity(LINEAR_VELOCITY, STATIONARY_ANGULAR);
+          std::this_thread::sleep_for(2000ms);
+          updatecommandVelocity(LINEAR_VELOCITY, -ANGULAR_VELOCITY);
+          std::this_thread::sleep_for(2000ms);
+        
+          break;
+
+        case 'F':
+          updatecommandVelocity(LINEAR_VELOCITY, STATIONARY_ANGULAR);
+          std::this_thread::sleep_for(4000ms);
+        
+          break;
+      
+      direction_step++;
+
+      //directions complete, at location
+      if (direction_list[current_location][desired_location][direction_step] == 0)
+      {
+        current_location = desired_location;
+        direction_step = 0; //resetting iterator
+      }
+
+
+    case GET_TB3_DIRECTION:
+      if (scan_data_[CENTER] > check_forward_dist_)
+      {
+        if (scan_data_[LEFT] < check_side_dist_)
+        { 
+          turtlebot3_state_num = TB3_FOLLOW_LEFT_WALL;
+        }
+        else if (scan_data_[RIGHT] < check_side_dist_)
+        {
+          prev_tb3_pose_ = tb3_pose_;
+          turtlebot3_state_num = TB3_LEFT_TURN;
+        }
+        else
+        {
+          turtlebot3_state_num = TB3_DRIVE_FORWARD;
+        }
+      }
+
+      if (scan_data_[CENTER] < check_forward_dist_)
+      {
+        prev_tb3_pose_ = tb3_pose_;
+        turtlebot3_state_num = TB3_RIGHT_TURN;
+      }
+      break;
+      
+    case TB3_DRIVE_FORWARD:
+
+      updatecommandVelocity(LINEAR_VELOCITY, STATIONARY_ANGULAR);
+      turtlebot3_state_num = GET_TB3_DIRECTION;
+      break;
+
+    case TB3_FOLLOW_LEFT_WALL:
+      if (scan_data_[CENTER] < check_forward_dist_)
+      {
+        turtlebot3_state_num = TB3_CORNER_TURN;
+        break;
+      }
+    
+      if (scan_data_[LEFT] < WALL_CLEARANCE - FOLLOW_BUFFER)
+      {
+        // too close to the wall, turn right
+        updatecommandVelocity(LINEAR_VELOCITY, -1 * ANGULAR_VELOCITY);
+      }
+      else if (scan_data_[LEFT] > WALL_CLEARANCE + FOLLOW_BUFFER)
+      {
+        // too far from the wall, turn left
+        updatecommandVelocity(LINEAR_VELOCITY, ANGULAR_VELOCITY);
+      }
+      else
+      {
+        // just right, move straight
+        updatecommandVelocity(LINEAR_VELOCITY, STATIONARY_ANGULAR);
+      }
+      break;
+    
+    case TB3_CORNER_TURN:
+      if (scan_data_[CENTER] > check_forward_dist_)
+      {
+        turtlebot3_state_num = TB3_FOLLOW_LEFT_WALL;
+      }
+      else
+      {
+        updatecommandVelocity(STATIONARY_LINEAR, -1 * ANGULAR_VELOCITY); // turn right
+      }
+      break;
+
+    
+      default:
+      turtlebot3_state_num = GET_TB3_DIRECTION;
+      break;
+    
+  }
+    return true;
+}
+
+
+/*******************************************************************************
+* Main function
+*******************************************************************************/
+// Main function initializing the node and running the control loop.
+int main(int argc, char* argv[])
+{
+  ros::init(argc, argv, "turtlebot3_drive");
+  Turtlebot3Drive turtlebot3_drive; // Create turtlebot3 drive object.
+
+  ros::Rate loop_rate(LOOP_RATE);  // Set loop rate.
+
+  // Main loop to keep running the control logic.
+  while (ros::ok())
+  {
+    ros::spinOnce();
+    turtlebot3_drive.controlLoop();
+    loop_rate.sleep();
+  }
+
+  return 0;
+}
