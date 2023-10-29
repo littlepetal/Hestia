@@ -98,11 +98,11 @@ void Turtlebot3Drive::cylinderSignalCallback(const std_msgs::Int32::ConstPtr &ms
 int current_location = 0; //assuming it starts at water
 int direction_step = 0;
 int desired_location = 0;
-// [[water station list], [fire 1[], [fire2], [fire3]
-int direction_list[4][4][5] = [[[0,0,0,0,0],[L,R,R,L,0],[L,R,R,L,0],[L,R,R,L,0]], //water 
-                              [[L,R,R,L,0,0],[0,0,0,0,0],[L,R,R,L,0],[L,R,R,L,0]],  //fire 1
-                              [[L,R,R,L,0],[L,R,R,L,0],[0,0,0,0,0],[L,R,R,L,0]],   //fire 2
-                              [[L,R,R,L,0],[L,R,R,L,0],[L,R,R,L,0],[0,0,0,0,0]]];   //fire 3
+// [[water station list], [fire 1], [fire2], [fire3]]
+int direction_list[4][4][5] = {{{'0','0','0','0','0'},{'L','R','R','L','0'},{'L','R','R','L','0'},{'L','R','R','L','0'}}, 
+                              {{'L','R','R','L','0'},{'0','0','0','0','0'},{'L','R','R','L','0'},{'L','R','R','L','0'}},  
+                              {{'L','R','R','L','0'},{'L','R','R','L','0'},{'0','0','0','0','0'},{'L','R','R','L','0'}},  
+                              {{'L','R','R','L','0'},{'L','R','R','L','0'},{'L','R','R','L','0'},{'0','0','0','0','0'}}};   
 
 
 // Main control function determining how the turtlebot navigates.
@@ -162,7 +162,7 @@ bool Turtlebot3Drive::controlLoop()
       direction_step++;
 
       //directions complete, at location
-      if (direction_list[current_location][desired_location][direction_step] == 0)
+      if (direction_list[current_location][desired_location][direction_step] == '0')
       {
         current_location = desired_location;
         direction_step = 0; //resetting iterator
